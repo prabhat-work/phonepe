@@ -9,8 +9,6 @@ import com.machinecoding.phonepe.models.VersionRange;
 import com.machinecoding.phonepe.service.AppVersionManagerService;
 import com.machinecoding.phonepe.service.PatchGeneratorService;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class AppVersionManagerServiceImpl implements AppVersionManagerService {
@@ -59,7 +57,7 @@ public class AppVersionManagerServiceImpl implements AppVersionManagerService {
       // Create a binary patch
       byte[] patch = patchGenerator.createBinaryPatch(sourceBytes, targetBytes);
       updatedData = patchGenerator.applyBinaryPatch(sourceBytes, patch);
-      System.out.println("Updated patch with Data" + new String(updatedData));
+      System.out.println("Updated patch Data for version " + sourceVersion.getVersionName());
     }
     catch (Exception ex){
       System.out.println("Error: " + ex.getMessage());
@@ -77,7 +75,7 @@ public class AppVersionManagerServiceImpl implements AppVersionManagerService {
       for (Device device : selectedDevices) {
         boolean isSupported = isAppVersionSupported(version, device);
         if (isSupported) {
-          System.out.println("Released version '" + version.getVersionName() + "' to device '");
+          System.out.println("Released version '" + version.getVersionName() + "' to devices' ");
         } else {
           System.out.println("Version '" + version.getVersionName() + "' is not supported on device '");
         }
@@ -110,7 +108,7 @@ public class AppVersionManagerServiceImpl implements AppVersionManagerService {
 
       return isVersionInRange(deviceVersion, targetMinVersion, targetMaxVersion);
     }
-    return true;
+    return false;
   }
 
   private boolean isVersionInRange(String version, String minVersion, String maxVersion) {
